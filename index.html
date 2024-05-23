@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Custom Calculator</title>
-    <script src="script.js" defer></script>
+    <style>
+        #result {
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
     <h1>Custom Calculator</h1>
@@ -18,5 +22,37 @@
         <button type="submit">Calculate</button>
     </form>
     <div id="result"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('calculator-form');
+            const resultDiv = document.getElementById('result');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const health = parseInt(document.getElementById('health').value);
+                const int = parseInt(document.getElementById('int').value);
+
+                // Calculate base HP and MP based on provided values
+                const baseHP = health * 50;
+                const baseMP = int;
+
+                // Calculate levels
+                const levels = Math.floor(health / 10);
+
+                // Calculate additional HP and MP based on levels
+                const additionalHP = levels * 100;
+                const additionalMP = levels * 5;
+
+                // Total HP and MP
+                const totalHP = baseHP + additionalHP;
+                const totalMP = baseMP + additionalMP;
+
+                // Display the result
+                resultDiv.textContent = `Total HP: ${totalHP}, Total MP: ${totalMP}`;
+            });
+        });
+    </script>
 </body>
 </html>
